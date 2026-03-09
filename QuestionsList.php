@@ -14,7 +14,7 @@ class QuestionsList extends Collection
 
         preg_match_all(
 
-            '/######\s*(\d+)\.\s*(.*?)\n([\s\S]*?)<details>[\s\S]*?Đáp án[\s\S]*?<p>([\s\S]*?)<\/p>/',
+            '/######\s*(\d+)\.\s*(.*?)\n([\s\S]*?)\n-\s*A:\s*(.*?)\n-\s*B:\s*(.*?)\n-\s*C:\s*(.*?)\n-\s*D:\s*(.*?)\n[\s\S]*?<details>[\s\S]*?Đáp án[\s\S]*?<p>([\s\S]*?)<\/p>/',
 
             $text,
 
@@ -37,11 +37,15 @@ class QuestionsList extends Collection
             // nhóm 3: nội dung câu hỏi
             $content = trim($m[3]);
 
-            // nhóm 4: phần giải thích đáp án
-            $answer  = trim($m[4]);
+            // nhóm 4: options câu hỏi
+            $options = ['A' => trim($m[4]),'B' => trim($m[5]),'C' => trim($m[6]),'D' => trim($m[7]),
+];
+
+            // nhóm 5: phần giải thích đáp án
+            $answer  = trim($m[8]);
 
             // tạo object Question mới rồi thêm vào mảng
-            $questions[] = new Question($number, $title, $content, $answer);
+            $questions[] = new Question($number, $title, $content,$options, $answer);
         }
 
         return new static($questions);

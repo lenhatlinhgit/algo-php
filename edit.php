@@ -15,23 +15,15 @@ class edit {
 }
 public static function editcontent($content)
 {
-
+    // bỏ markdown code block
     $content = str_replace(['```javascript', '```'], '', $content);
 
+    // bỏ inline code
     $content = str_replace('`', '', $content);
 
+    // xuống dòng html
     $content = str_replace("\n", '<br/>', $content);
 
-    preg_match_all('/([A-D]:[^A-D]*)/', $content, $m);
-
-    $question = trim(preg_replace('/- A:.*$/', '', $content));
-
-    $result = $question . "<br/>";
-
-    foreach ($m[1] as $opt) {
-        $result .= trim($opt) . "<br/>";
-    }
-
-    return $result;
+    return trim($content);
 }
 }
