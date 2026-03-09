@@ -14,7 +14,18 @@
     {
         "number": "2",
         "title": "Output sẽ là gì?",
-        "content": "```javascript\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 1);\n}\n\nfor (let i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 1);\n}\n```\n\n- A: `0 1 2` and `0 1 2`\n- B: `0 1 2` and `3 3 3`\n- C: `3 3 3` and `0 1 2`\n\n<details><summary><b>Đáp án<\/b><\/summary>\n<p>\n\n#### Đáp án: C\n\nBởi vì event queue trong JavaScript, hàm `setTimeout` callback sẽ được gọi _sau khi_ vòng lặp được thực hiện. Bời vì biến `i` trong vòng lặp đầu tiên được khai báo với từ khóa `var`, nên nó sẽ là một biến global. Trong suốt vòng lặp, mỗi lần chúng ta tăng giá trị của `i` lên `1`, sử dụng phép toán `++`. Cho tới khi callback `setTimeout` được gọi, giá trị của `i` đã trở thành `3` rồi.\n\nTrong vòng lặp thứ 2, biến `i` được khai báo với từ khóa `let`, có nghĩa nó là một biến block-scoped (block là những gì được viết bên trong cặp ngoặc `{ }`). Tại mỗi vòng lặp, `i` sẽ là một biến mới có một giá trị mới, và giá trị đó có scope là bên trong vòng lặp mà thôi.\n\n<\/p>\n<\/details>\n\n---\n\n###### 3. Output sẽ là gì?\n\n```javascript\nconst shape = {\n  radius: 10,\n  diameter() {\n    return this.radius * 2;\n  },\n  perimeter: () => 2 * Math.PI * this.radius\n};\n\nshape.diameter();\nshape.perimeter();\n```",
+        "content": "```javascript\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 1);\n}\n\nfor (let i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 1);\n}\n```",
+        "options": {
+            "A": "`0 1 2` and `0 1 2`",
+            "B": "`0 1 2` and `3 3 3`",
+            "C": "`3 3 3` and `0 1 2`"
+        },
+        "answer": "#### Đáp án: C\n\nBởi vì event queue trong JavaScript, hàm `setTimeout` callback sẽ được gọi _sau khi_ vòng lặp được thực hiện. Bời vì biến `i` trong vòng lặp đầu tiên được khai báo với từ khóa `var`, nên nó sẽ là một biến global. Trong suốt vòng lặp, mỗi lần chúng ta tăng giá trị của `i` lên `1`, sử dụng phép toán `++`. Cho tới khi callback `setTimeout` được gọi, giá trị của `i` đã trở thành `3` rồi.\n\nTrong vòng lặp thứ 2, biến `i` được khai báo với từ khóa `let`, có nghĩa nó là một biến block-scoped (block là những gì được viết bên trong cặp ngoặc `{ }`). Tại mỗi vòng lặp, `i` sẽ là một biến mới có một giá trị mới, và giá trị đó có scope là bên trong vòng lặp mà thôi."
+    },
+    {
+        "number": "3",
+        "title": "Output sẽ là gì?",
+        "content": "```javascript\nconst shape = {\n  radius: 10,\n  diameter() {\n    return this.radius * 2;\n  },\n  perimeter: () => 2 * Math.PI * this.radius\n};\n\nshape.diameter();\nshape.perimeter();\n```",
         "options": {
             "A": "`20` and `62.83185307179586`",
             "B": "`20` and `NaN`",
@@ -26,7 +37,18 @@
     {
         "number": "4",
         "title": "Output là gì?",
-        "content": "```javascript\n+true;\n!\"Lydia\";\n```\n\n- A: `1` and `false`\n- B: `false` and `NaN`\n- C: `false` and `false`\n\n<details><summary><b>Đáp án<\/b><\/summary>\n<p>\n\n#### Đáp án: A\n\nPhép toán cộng `+` sẽ convert một toán hạng sang dạng number. `true` là `1`, và `false` is `0`.\n\nChuỗi `'Lydia'` là một _truthy value_. Điều chúng ta thật sự đang hỏi chính là  \"có phải một giá trị truthy là falsy?\". Rõ ràng câu trả lời là `false` rồi.\n\n<\/p>\n<\/details>\n\n---\n\n###### 5. Cái nào đúng?\n\n```javascript\nconst bird = {\n  size: \"small\"\n};\n\nconst mouse = {\n  name: \"Mickey\",\n  small: true\n};\n```",
+        "content": "```javascript\n+true;\n!\"Lydia\";\n```",
+        "options": {
+            "A": "`1` and `false`",
+            "B": "`false` and `NaN`",
+            "C": "`false` and `false`"
+        },
+        "answer": "#### Đáp án: A\n\nPhép toán cộng `+` sẽ convert một toán hạng sang dạng number. `true` là `1`, và `false` is `0`.\n\nChuỗi `'Lydia'` là một _truthy value_. Điều chúng ta thật sự đang hỏi chính là  \"có phải một giá trị truthy là falsy?\". Rõ ràng câu trả lời là `false` rồi."
+    },
+    {
+        "number": "5",
+        "title": "Cái nào đúng?",
+        "content": "```javascript\nconst bird = {\n  size: \"small\"\n};\n\nconst mouse = {\n  name: \"Mickey\",\n  small: true\n};\n```",
         "options": {
             "A": "`mouse.bird.size` không hợp lệ",
             "B": "`mouse[bird.size]` không hợp lệ",
@@ -43,7 +65,8 @@
             "A": "`Hello`",
             "B": "`Hey`",
             "C": "`undefined`",
-            "D": "`ReferenceError`"
+            "D": "`ReferenceError`",
+            "E": "`TypeError`"
         },
         "answer": "#### Đáp án: A\n\nTrong JavaScript, tất cả các object sẽ được _tham chiếu_ khi chúng được gán _bằng_wwwww  một giá trị khác.\n\nĐầu tiên, giá trị `c` có giá trị là một object. Sau đó, chúng ta gán `d` tham chiếu tới object mà `c` trỏ tới.\n\n<img src=\"https:\/\/i.imgur.com\/ko5k0fs.png\" width=\"200\">\n\nKhi ta thay đổi giá trị của object, tất cả các biến tham chiếu cũng đều thay đổi giá trị theo."
     },
@@ -74,7 +97,18 @@
     {
         "number": "9",
         "title": "Output là gì?",
-        "content": "```javascript\nlet greeting;\ngreetign = {}; \/\/ Lỗi đánh máy!\nconsole.log(greetign);\n```\n\n- A: `{}`\n- B: `ReferenceError: greetign is not defined`\n- C: `undefined`\n\n<details><summary><b>Đáp án<\/b><\/summary>\n<p>\n\n#### Đáp án: A\n\nNó sẽ log ra object `greetign`, bởi vì chúng ta vừa khởi tạo một global object! Khi chúng ta đánh máy nhầm `greeting` thành `greetign`, trình thông dịch của JS sẽ coi nó như là `global.greetign = {}` (hay `window.greetign = {}` nếu chạy trên browser).\n\nĐể tránh điều này chúng ta có thể sử dụng `\"use strict\"`. Nó sẽ đảm bảo rẳng các biến đều phải được khai báo trước khi sử dụng.\n\n<\/p>\n<\/details>\n\n---\n\n###### 10. Điều gì sẽ xảy ra khi chúng ta làm thế này?\n\n```javascript\nfunction bark() {\n  console.log(\"Woof!\");\n}\n\nbark.animal = \"dog\";\n```",
+        "content": "```javascript\nlet greeting;\ngreetign = {}; \/\/ Lỗi đánh máy!\nconsole.log(greetign);\n```",
+        "options": {
+            "A": "`{}`",
+            "B": "`ReferenceError: greetign is not defined`",
+            "C": "`undefined`"
+        },
+        "answer": "#### Đáp án: A\n\nNó sẽ log ra object `greetign`, bởi vì chúng ta vừa khởi tạo một global object! Khi chúng ta đánh máy nhầm `greeting` thành `greetign`, trình thông dịch của JS sẽ coi nó như là `global.greetign = {}` (hay `window.greetign = {}` nếu chạy trên browser).\n\nĐể tránh điều này chúng ta có thể sử dụng `\"use strict\"`. Nó sẽ đảm bảo rẳng các biến đều phải được khai báo trước khi sử dụng."
+    },
+    {
+        "number": "10",
+        "title": "Điều gì sẽ xảy ra khi chúng ta làm thế này?",
+        "content": "```javascript\nfunction bark() {\n  console.log(\"Woof!\");\n}\n\nbark.animal = \"dog\";\n```",
         "options": {
             "A": "Hoàn toàn không có vấn đề gì!",
             "B": "`SyntaxError`. Bạn không thể thêm thuộc tính theo cách này.",
@@ -122,7 +156,17 @@
     {
         "number": "14",
         "title": "Tất cả các object đều có prototypes.",
-        "content": "- A: đúng\n- B: sai\n\n<details><summary><b>Đáp án<\/b><\/summary>\n<p>\n\n#### Đáp án: B\n\nTất cả các object đều có prototypes, ngoại trừ **base object**. Object base có thể truy cập đến vài methods và properties, ví dụ như `.toString`. Đó là lý do tại sao chúng ta có thể sử dụng được các built-in methods trong JavaScript! Tất cả các phương thức đó đều có trong prototype. Mặc dù JavaScript không thể tìm thấy chúng trong object một cách trực tiếp, nó sẽ được truyền xuống thông qua prototype chain và xuống tới object, tại đây chúng ta có thể truy cập được nó.\n\n<\/p>\n\n<\/details>\n\n---\n\n###### 15. Output là gì?\n\n```javascript\nfunction sum(a, b) {\n  return a + b;\n}\n\nsum(1, \"2\");\n```",
+        "content": "",
+        "options": {
+            "A": "đúng",
+            "B": "sai"
+        },
+        "answer": "#### Đáp án: B\n\nTất cả các object đều có prototypes, ngoại trừ **base object**. Object base có thể truy cập đến vài methods và properties, ví dụ như `.toString`. Đó là lý do tại sao chúng ta có thể sử dụng được các built-in methods trong JavaScript! Tất cả các phương thức đó đều có trong prototype. Mặc dù JavaScript không thể tìm thấy chúng trong object một cách trực tiếp, nó sẽ được truyền xuống thông qua prototype chain và xuống tới object, tại đây chúng ta có thể truy cập được nó."
+    },
+    {
+        "number": "15",
+        "title": "Output là gì?",
+        "content": "```javascript\nfunction sum(a, b) {\n  return a + b;\n}\n\nsum(1, \"2\");\n```",
         "options": {
             "A": "`NaN`",
             "B": "`TypeError`",
@@ -146,7 +190,29 @@
     {
         "number": "17",
         "title": "Output là gì?",
-        "content": "```javascript\nfunction getPersonInfo(one, two, three) {\n  console.log(one);\n  console.log(two);\n  console.log(three);\n}\n\nconst person = \"Lydia\";\nconst age = 21;\n\ngetPersonInfo`${person} is ${age} years old`;\n```\n\n- A: `\"Lydia\"` `21` `[\"\", \" is \", \" years old\"]`\n- B: `[\"\", \" is \", \" years old\"]` `\"Lydia\"` `21`\n- C: `\"Lydia\"` `[\"\", \" is \", \" years old\"]` `21`\n\n<details><summary><b>Đáp án<\/b><\/summary>\n<p>\n\n#### Đáp án: B\n\nNếu bạn dùng _tagged template literals_, giá trị của đối số đầu tiên luôn luôn là một mảng các string. Những đối số còn lại sẽ lấy giá trị từ biểu thức đưa vào!\n\n<\/p>\n<\/details>\n\n---\n\n###### 18. Output là gì?\n\n```javascript\nfunction checkAge(data) {\n  if (data === { age: 18 }) {\n    console.log(\"You are an adult!\");\n  } else if (data == { age: 18 }) {\n    console.log(\"You are still an adult.\");\n  } else {\n    console.log(`Hmm.. You don't have an age I guess`);\n  }\n}\n\ncheckAge({ age: 18 });\n```\n\n- A: `You are an adult!`\n- B: `You are still an adult.`\n- C: `Hmm.. You don't have an age I guess`\n\n<details><summary><b>Đáp án<\/b><\/summary>\n<p>\n\n#### Đáp án: C\n\nKhi test sự bằng nhau, các kiểu dữ liệu cơ bản sẽ so sánh _giá trị_ của chúng, còn object thì so sánh _tham chiếu_. JavaScript sẽ kiểm tra xem các object đó có trỏ đến những vùng nhớ giống nhau hay không.\n\nHai object chúng ta đang so sánh không có được điều đó: object đối số tham chiếu đến một vùng nhớ khác với object chúng ta dùng để kiểm tra sự bằng nhau.\n\nĐó là lý do tại sao cả `{ age: 18 } === { age: 18 }` và `{ age: 18 } == { age: 18 }` đều trả về `false`.\n\n<\/p>\n<\/details>\n\n---\n\n###### 19. Output là gì?\n\n```javascript\nfunction getAge(...args) {\n  console.log(typeof args);\n}\n\ngetAge(21);\n```",
+        "content": "```javascript\nfunction getPersonInfo(one, two, three) {\n  console.log(one);\n  console.log(two);\n  console.log(three);\n}\n\nconst person = \"Lydia\";\nconst age = 21;\n\ngetPersonInfo`${person} is ${age} years old`;\n```",
+        "options": {
+            "A": "`\"Lydia\"` `21` `[\"\", \" is \", \" years old\"]`",
+            "B": "`[\"\", \" is \", \" years old\"]` `\"Lydia\"` `21`",
+            "C": "`\"Lydia\"` `[\"\", \" is \", \" years old\"]` `21`"
+        },
+        "answer": "#### Đáp án: B\n\nNếu bạn dùng _tagged template literals_, giá trị của đối số đầu tiên luôn luôn là một mảng các string. Những đối số còn lại sẽ lấy giá trị từ biểu thức đưa vào!"
+    },
+    {
+        "number": "18",
+        "title": "Output là gì?",
+        "content": "```javascript\nfunction checkAge(data) {\n  if (data === { age: 18 }) {\n    console.log(\"You are an adult!\");\n  } else if (data == { age: 18 }) {\n    console.log(\"You are still an adult.\");\n  } else {\n    console.log(`Hmm.. You don't have an age I guess`);\n  }\n}\n\ncheckAge({ age: 18 });\n```",
+        "options": {
+            "A": "`You are an adult!`",
+            "B": "`You are still an adult.`",
+            "C": "`Hmm.. You don't have an age I guess`"
+        },
+        "answer": "#### Đáp án: C\n\nKhi test sự bằng nhau, các kiểu dữ liệu cơ bản sẽ so sánh _giá trị_ của chúng, còn object thì so sánh _tham chiếu_. JavaScript sẽ kiểm tra xem các object đó có trỏ đến những vùng nhớ giống nhau hay không.\n\nHai object chúng ta đang so sánh không có được điều đó: object đối số tham chiếu đến một vùng nhớ khác với object chúng ta dùng để kiểm tra sự bằng nhau.\n\nĐó là lý do tại sao cả `{ age: 18 } === { age: 18 }` và `{ age: 18 } == { age: 18 }` đều trả về `false`."
+    },
+    {
+        "number": "19",
+        "title": "Output là gì?",
+        "content": "```javascript\nfunction getAge(...args) {\n  console.log(typeof args);\n}\n\ngetAge(21);\n```",
         "options": {
             "A": "`\"number\"`",
             "B": "`\"array\"`",
@@ -230,7 +296,18 @@
     {
         "number": "26",
         "title": "Ngữ cảnh thực thi global của JavaScript tạo ra 2 thứ cho chúng ta: global object, và từ khóa \"this\".",
-        "content": "- A: đúng\n- B: sai\n- C: còn tùy\n\n<details><summary><b>Đáp án<\/b><\/summary>\n<p>\n\n#### Đáp án: A\n\nNgữ cảnh thực thi cơ bản chính là ngữ cảnh global: nó là thứ mà chúng ta có thể truy cập được ở bất cứ đâu trong code.\n\n<\/p>\n<\/details>\n\n---\n\n###### 27. Output là gì?\n\n```javascript\nfor (let i = 1; i < 5; i++) {\n  if (i === 3) continue;\n  console.log(i);\n}\n```",
+        "content": "",
+        "options": {
+            "A": "đúng",
+            "B": "sai",
+            "C": "còn tùy"
+        },
+        "answer": "#### Đáp án: A\n\nNgữ cảnh thực thi cơ bản chính là ngữ cảnh global: nó là thứ mà chúng ta có thể truy cập được ở bất cứ đâu trong code."
+    },
+    {
+        "number": "27",
+        "title": "Output là gì?",
+        "content": "```javascript\nfor (let i = 1; i < 5; i++) {\n  if (i === 3) continue;\n  console.log(i);\n}\n```",
         "options": {
             "A": "`1` `2`",
             "B": "`1` `2` `3`",
@@ -564,6 +641,18 @@
         "answer": "#### Đáp án: A\n\n`let x = y = 10;` chính là cách viết ngắn gọn của:\n\n```javascript\ny = 10;\nlet x = y;\n```\n\nKhi ta set `y` bằng `10`, thực tế chúng ta đã sử dụng biến global `y` (`window` nếu là trên browser, `global` nếu là môi trường Node).Trên browser, `window.y` sẽ là `10`.\n\nSau đó, chúng ta khai báo giá trị của `x` với giá trị của `y`, tức `10`. Tuy nhiên khi ta khai báo với từ khóa `let` biến x sẽ chỉ tồn tại trong _block scoped_; hay trong trường hợp này là `hàm thực hiện ngay lập tức` (immediately-invoked function - IIFE). Khi ta sử dụng phép toán `typeof`, `x` hoàn toàn chưa được định nghĩa: vì `x` lúc này nằm bên ngoài block nó được định nghĩa lúc trước. Nghĩa là `x` là `undefined`. Do đó `console.log(typeof x)` trả về `\"undefined\"`.\n\nTuy nhiên với `y` thì khác, ta đã có giá trị của `y` khi set `y` bằng `10`. Giá trị đó có thể truy cập được từ bất kì đâu bởi chúng là biến global. `y` được định nghĩa với kiểu là `\"number\"`. Do đó `console.log(typeof y)` trả về `\"number\"`."
     },
     {
+        "number": "55",
+        "title": "Output là gì?",
+        "content": "```javascript\nclass Dog {\n  constructor(name) {\n    this.name = name;\n  }\n}\n\nDog.prototype.bark = function() {\n  console.log(`Woof I am ${this.name}`);\n};\n\nconst pet = new Dog(\"Mara\");\n\npet.bark();\n\ndelete Dog.prototype.bark;\n\npet.bark();\n```",
+        "options": {
+            "A": "`\"Woof I am Mara\"`, `TypeError`",
+            "B": "`\"Woof I am Mara\"`,`\"Woof I am Mara\"`",
+            "C": "`\"Woof I am Mara\"`, `undefined`",
+            "D": "`TypeError`, `TypeError`"
+        },
+        "answer": "#### Đáp án: A\n\nChúng ta có thể xóa các thuộc tính khỏe object bằng từ khóa `delete`, kể cả với prototype. Khi chúng ta xóa một thuộc tính trên prototype, nó sẽ bị vô hiệu hóa hoàn toàn trong chuỗi prototype. Trong trường hợp này, hàm `bark` sẽ bị vô hiệu hóa ngay sau khi chúng ta thực hiện hàm xóa `delete Dog.prototype.bark`, tất nhiên ta vẫn có thể truy cập vào nó nhưng giá trị sẽ là `undefined`.\n\nKhi chúng ta chạy một thứ không phải là `hàm`, nó sẽ bắn ra một `TypeError`. Trong trường hợp này là `TypeError: pet.bark is not a function`, vì bản thân thuộc tính `pet.bark` là `undefined`."
+    },
+    {
         "number": "56",
         "title": "Output là gì?",
         "content": "```javascript\nconst set = new Set([1, 1, 2, 3, 4]);\n\nconsole.log(set);\n```",
@@ -818,7 +907,17 @@
     {
         "number": "77",
         "title": "Đây có phải là một pure function không?",
-        "content": "```javascript\nfunction sum(a, b) {\n  return a + b;\n}\n```\n\n- A: Yes\n- B: No\n\n<details><summary><b>Đáp án<\/b><\/summary>\n<p>\n\n#### Đáp án: A\n\nMột hàm được gọi là _pure function_ khi nó luôn luôn trả về một giá trị giống nhau, nếu đối số đưa vào là giống nhau.\n\nHàm `sum` luôn trả về giá trị giống nhau. Nếu ta đưa vào `1` và `2`, nó sẽ _luôn_ trả về `3`. Nếu ta đưa vào `5` và `10`, nó _luôn_ trả về `15`. Cứ như vậy, đây là một _pure function_.\n\n<\/p>\n<\/details>\n\n---\n\n###### 78. Output là gì?\n\n```javascript\nconst add = () => {\n  const cache = {};\n  return num => {\n    if (num in cache) {\n      return `From cache! ${cache[num]}`;\n    } else {\n      const result = num + 10;\n      cache[num] = result;\n      return `Calculated! ${result}`;\n    }\n  };\n};\n\nconst addFunction = add();\nconsole.log(addFunction(10));\nconsole.log(addFunction(10));\nconsole.log(addFunction(5 * 2));\n```",
+        "content": "```javascript\nfunction sum(a, b) {\n  return a + b;\n}\n```",
+        "options": {
+            "A": "Yes",
+            "B": "No"
+        },
+        "answer": "#### Đáp án: A\n\nMột hàm được gọi là _pure function_ khi nó luôn luôn trả về một giá trị giống nhau, nếu đối số đưa vào là giống nhau.\n\nHàm `sum` luôn trả về giá trị giống nhau. Nếu ta đưa vào `1` và `2`, nó sẽ _luôn_ trả về `3`. Nếu ta đưa vào `5` và `10`, nó _luôn_ trả về `15`. Cứ như vậy, đây là một _pure function_."
+    },
+    {
+        "number": "78",
+        "title": "Output là gì?",
+        "content": "```javascript\nconst add = () => {\n  const cache = {};\n  return num => {\n    if (num in cache) {\n      return `From cache! ${cache[num]}`;\n    } else {\n      const result = num + 10;\n      cache[num] = result;\n      return `Calculated! ${result}`;\n    }\n  };\n};\n\nconst addFunction = add();\nconsole.log(addFunction(10));\nconsole.log(addFunction(10));\nconsole.log(addFunction(5 * 2));\n```",
         "options": {
             "A": "`Calculated! 20` `Calculated! 20` `Calculated! 20`",
             "B": "`Calculated! 20` `From cache! 20` `Calculated! 20`",
@@ -924,6 +1023,18 @@
         "answer": "#### Đáp án: A\n\nVới `!!name`, chúng ta sẽ đánh giá giá trị của `name` là _truthy_ hay _falsy_. Nếu name là truthy, thì `!name` sẽ trả về `false`. `!false` (hay chính là `!!name` khi này) sẽ trả về `true`.\n\nBằng cách set `hasName` bằng với `name`, chúng ta set `hasName` bằng với giá trị đối số đưa vào trong hàm `getName`, không thỏa mãn vì ta đã giới hạn là không đưa `true` vào.\n\n`new Boolean(true)` trả về một object wrapper, chứ không phải là một giá trị boolean.\n\n`name.length` trả về độ dài của đối số, chứ không phải `true`."
     },
     {
+        "number": "87",
+        "title": "Output là gì?",
+        "content": "```javascript\nconsole.log(\"I want pizza\"[0])\n```",
+        "options": {
+            "A": "`\"\"\"`",
+            "B": "`\"I\"`",
+            "C": "`SyntaxError`",
+            "D": "`undefined`"
+        },
+        "answer": "#### Đáp án: B\n\nTrong trường hợp ta muốn lấy ra một ký tự trong một chuỗi, ta có thể sử dụng toán tử ngoặc vuông. Ký tự đầu tiên sẽ có thứ tự là 0, và cứ tiếp tục như vậy. Trong trường hợp này chúng ta lấy ra ký tự có thứ tự là 0, đó chính là ký tự `\"I'`.\n\nChú ý là phương thức này không hoạt động với IE7 trở xuống. Thay vì thế ta sử dụng `.charAt()`"
+    },
+    {
         "number": "88",
         "title": "Output là gì?",
         "content": "```javascript\nfunction sum(num1, num2 = num1) {\n  console.log(num1 + num2)\n}\n\nsum(10)\n```",
@@ -1006,6 +1117,18 @@
             "D": "`SyntaxError`"
         },
         "answer": "#### Đáp án: D\n\n`...args` là cú pháp tham số cuối cùng. Giá trị của tham số cuối cùng chính là toàn bộ các đối số còn lại, **và nó là tham số cuối cùng duy nhất**! Trong trường hợp này, tham số cuối cùng lại là tham số thứ hai. Điều đó là không thể được, và sẽ throw ra một lỗi cú pháp. \n\n```javascript\nfunction getItems(fruitList, favoriteFruit, ...args) {\n  return [...fruitList, ...args, favoriteFruit]\n}\n\ngetItems([\"banana\", \"apple\"], \"pear\", \"orange\")\n```\n\nNếu ta code như thế này thì lại đúng. Giá trị trả về sẽ là `[ 'banana', 'apple', 'orange', 'pear' ]`"
+    },
+    {
+        "number": "95",
+        "title": "Output là gì?",
+        "content": "```javascript\nfunction nums(a, b) {\n  if\n  (a > b)\n  console.log('a is bigger')\n  else \n  console.log('b is bigger')\n  return \n  a + b\n}\n\nconsole.log(nums(4, 2))\nconsole.log(nums(1, 2))\n```",
+        "options": {
+            "A": "`a is bigger`, `6` và `b is bigger`, `3`",
+            "B": "`a is bigger`, `undefined` và `b is bigger`, `undefined`",
+            "C": "`undefined` và `undefined`",
+            "D": "`SyntaxError`"
+        },
+        "answer": "#### Đáp án: B\n\nVới JavaScript, ta _không bắt buộc_ phải viết dấu chấm phẩy (`;`), JavaScript engine sẽ tự động thêm vào sau mỗi câu lệnh. Nó gọi là **Automatic Semicolon Insertion**. Một câu lệnh có thể là khai báo biến, hoặc từ khóa như `throw`, `return`, `break`, vv. \n\nỞ đây ta sử dụng câu lệnh `return` ở một dòng và giá trị `a + b` ở một _dòng khác_. Tuy nhiên do khác dòng nên JS engine không thể biết đâu là giá trị ta thực sự muốn trả về. Thay vì thế, nó sẽ tự động thêm vào dấu chấm phẩy ngay sau `return` giống như này:\n\n```javascript\n  return;\n  a + b\n```\n\nCó nghĩa là `a + b` sẽ không bao giờ được thực hiện, vì hàm đã được `return` rồi. Do không giá trị nào được trả về, nên giá trị trả về của hàm sẽ là `undefined`. Lưu ý là sẽ không tự động thêm dấu chấm phẩy ngay sau `if\/else` đâu nhé!"
     },
     {
         "number": "96",
@@ -1142,7 +1265,17 @@
     {
         "number": "107",
         "title": "Ouput là gì?",
-        "content": "```javascript\nconsole.log('❤️' === '❤️')\n```\n\n- A: `true`\n- B: `false`\n\n<details><summary><b>Đáp án<\/b><\/summary>\n<p>\n\n#### Đáp án: A\n\nVề cơ bản, emoji vẫn là các ký tự unicode mà thôi. Mã unicode cho hình trái tim là `\"U+2764 U+FE0F\"`. Chúng luôn luôn là một, nên phép toán đơn giản trả về `true`. \n\n<\/p>\n<\/details>\n\n---\n\n###### 108. Phép toán nào sau đây làm thay đổi mảng gốc?\n\n```javascript\nconst emojis = ['✨', '🥑', '😍']\n\nemojis.map(x => x + '✨')\nemojis.filter(x => x !== '🥑')\nemojis.find(x => x !== '🥑')\nemojis.reduce((acc, cur) => acc + '✨')\nemojis.slice(1, 2, '✨') \nemojis.splice(1, 2, '✨')\n```",
+        "content": "```javascript\nconsole.log('❤️' === '❤️')\n```",
+        "options": {
+            "A": "`true`",
+            "B": "`false`"
+        },
+        "answer": "#### Đáp án: A\n\nVề cơ bản, emoji vẫn là các ký tự unicode mà thôi. Mã unicode cho hình trái tim là `\"U+2764 U+FE0F\"`. Chúng luôn luôn là một, nên phép toán đơn giản trả về `true`."
+    },
+    {
+        "number": "108",
+        "title": "Phép toán nào sau đây làm thay đổi mảng gốc?",
+        "content": "```javascript\nconst emojis = ['✨', '🥑', '😍']\n\nemojis.map(x => x + '✨')\nemojis.filter(x => x !== '🥑')\nemojis.find(x => x !== '🥑')\nemojis.reduce((acc, cur) => acc + '✨')\nemojis.slice(1, 2, '✨') \nemojis.splice(1, 2, '✨')\n```",
         "options": {
             "A": "`All of them`",
             "B": "`map` `reduce` `slice` `splice`",

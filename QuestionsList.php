@@ -8,48 +8,52 @@ class QuestionsList extends Collection
 {
 
     public static function parse($path)
-    {
+{
+    $text = file_get_contents($path);
 
-        $text = file_get_contents($path);
+    preg_match_all(
+        '/######\s*(?:<a[^>]*><\/a>)?\s*(\d+)\.\s*(.*?)\n([\s\S]*?)\n((?:-\s*[A-F]:\s*.*\n?){2,6})[\s\S]*?<details>[\s\S]*?Đáp án[\s\S]*?<p>([\s\S]*?)<\/p>/',
+        $text,
+        $matches,
+        PREG_SET_ORDER
+    );
 
-        preg_match_all(
+    $questions = [];
 
-            '/######\s*(\d+)\.\s*(.*?)\n([\s\S]*?)\n-\s*A:\s*(.*?)\n-\s*B:\s*(.*?)\n-\s*C:\s*(.*?)\n-\s*D:\s*(.*?)\n[\s\S]*?<details>[\s\S]*?Đáp án[\s\S]*?<p>([\s\S]*?)<\/p>/',
+    foreach ($matches as $m) {
 
-            $text,
+        // số câu
+        $number = trim($m[1]);
 
-            $matches,
+        // tiêu đề
+        $title = trim($m[2]);
 
-            // mỗi match sẽ là 1 phần tử riêng
-            PREG_SET_ORDER
-        );
+        // nội dung
+        $content = trim($m[3]);
 
-        $questions = [];
+        // options
+        $options = [];
 
-        foreach ($matches as $m) {
+        preg_match_all('/-\s*([A-F]):\s*(.*)/', $m[4], $opts);
 
-            // nhóm 1: số câu hỏi
-            $number  = trim($m[1]);
-
-            // nhóm 2: tiêu đề
-            $title   = trim($m[2]);
-
-            // nhóm 3: nội dung câu hỏi
-            $content = trim($m[3]);
-
-            // nhóm 4: options câu hỏi
-            $options = ['A' => trim($m[4]),'B' => trim($m[5]),'C' => trim($m[6]),'D' => trim($m[7]),
-];
-
-            // nhóm 5: phần giải thích đáp án
-            $answer  = trim($m[8]);
-
-            // tạo object Question mới rồi thêm vào mảng
-            $questions[] = new Question($number, $title, $content,$options, $answer);
+        foreach ($opts[1] as $i => $key) {
+            $options[$key] = trim($opts[2][$i]);
         }
 
-        return new static($questions);
+        // đáp án
+        $answer = trim($m[5]);
+
+        $questions[] = new Question(
+            $number,
+            $title,
+            $content,
+            $options,
+            $answer
+        );
     }
+
+    return new static($questions);
+}
 
     public function saveJson(string $path)
     {
